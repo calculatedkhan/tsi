@@ -31,21 +31,28 @@ public class Main {
         //System.out.println("The average cost of paint is £ " + (amount_paint_needed*5));
     }
     public static void paint_requirement(String brand, double paint_required) {
+        int one_litre = 0;
+        int five_litre = 0;
+        int ten_litre = 0;
+        int counter = 0;
         switch (brand) {
             case ("duluxe"):
                 if (paint_required <= 1) {
                     System.out.println("You need a 1 litre tin, costing £15");
+                    one_litre = one_litre + 1;
                 } else if (paint_required <= 5) {
                     System.out.println("You need a 5 litre tin, costing £25");
+                    five_litre = five_litre + 1;
                 } else if (paint_required <= 10) {
-                    System.out.println("You need a 5 litre tin, costing £25");
+                    System.out.println("You need a 10 litre tin, costing £35");
+                    ten_litre = ten_litre + 1;
                 } else {
-                    while (paint_required > 10) {
-                        System.out.println("You need a 10 litre tin, costing £35");
-                        paint_required = paint_required - 10;
-                        paint_requirement(brand, (paint_required));
-                    }
+                    System.out.println("You need a 10 litre tin, costing £35");
+                    ten_litre = ten_litre + 1;
+                    paint_required = paint_required - 10;
+                    paint_requirement(brand, paint_required);
                 }
+
 
         }
     }
@@ -73,9 +80,9 @@ public class Main {
         }
         else {
             System.out.println("Whats the length of non-painted area " + i);
-            double length1 = reader.nextInt();
+            double length1 = reader.nextDouble();
             System.out.println("Whats the width of non-painted area " + i);
-            double width1 = reader.nextInt();
+            double width1 = reader.nextDouble();
             double total2 = length1 * width1;
             return total2;
 
