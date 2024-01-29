@@ -6,7 +6,7 @@ public class Board {
     private Cell[][] cells;
     private boolean gameOver;
 
-    public Board(int rows, int columns) {
+    public Board(int rows, int columns) { //initialises the board with cells
         this.rows = rows;
         this.columns = columns;
         this.cells = new Cell[rows][columns];
@@ -19,15 +19,23 @@ public class Board {
 
     }
  
-    public boolean isGameOver() {
+    public boolean isGameOver() { //checks whether game is over
         return gameOver;
     }
 
-    public void setGameOver(boolean result) {
+    public void setGameOver(boolean result) { //sets the game to be over
         gameOver = result;
     }
 
-    public boolean checkWin() {
+    public boolean cellRevealedStatus(int r, int c) { //checks if cell is revealed
+        return (cells[r-1][c-1].isRevealed());
+    }
+
+    public boolean cellFlaggedStatus(int r, int c) { //checks if cell is flagged
+        return (cells[r-1][c-1].isFlagged());
+    }
+
+    public boolean checkWin() { //checks if player has won
         boolean allNonMineCellsRevealed = true;
         boolean allMineCellsNotRevealed = true;
 
@@ -53,7 +61,7 @@ public class Board {
         return allNonMineCellsRevealed && allMineCellsNotRevealed;
     }
 
-    public void placeMines(int numberOfMines) {
+    public void placeMines(int numberOfMines) { //randomly places mines, based on given difficulty
         Random random = new Random();
         for (int i = 0; i < numberOfMines; i++) {
             int mineRow = random.nextInt(rows);
@@ -71,7 +79,7 @@ public class Board {
         }
     }
 
-    public boolean cellFlagChecker() {
+    public boolean cellFlagChecker() { //checks if at least 1 cell is flagged
         boolean flagChecker = false;
         for (int i=0; i<rows; i++) {
             for (int j=0; j<columns; j++) {
@@ -83,15 +91,15 @@ public class Board {
         return flagChecker;
     }
 
-    public void flagCell(int r, int c) {
+    public void flagCell(int r, int c) { //sets a given cell to be flagged
         cells[r-1][c-1].setFlagged(true);
     }
 
-    public void unflagCell(int r, int c) {
+    public void unflagCell(int r, int c) { //sets a given cell to be unflagged
         cells[r-1][c-1].setFlagged(false);
     }
 
-    public void revealCell(int r, int c) {
+    public void revealCell(int r, int c) { //reveals cells based on chosen cell
         r = r - 1;
         c = c - 1;
         if (!cells[r][c].isRevealed() && !cells[r][c].isFlagged()) {
@@ -132,7 +140,7 @@ public class Board {
         }
     }
 
-    public void calculateNeighbouringMines() { //add diagonal
+    public void calculateNeighbouringMines() { //calculates neighbouring mines for each cell
         int counter = 0;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -168,7 +176,7 @@ public class Board {
         }
     }
 
-    public void displayBoard() {
+    public void displayBoard() { //displays board to console
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
                 System.out.print(cells[row][col] + " ");
