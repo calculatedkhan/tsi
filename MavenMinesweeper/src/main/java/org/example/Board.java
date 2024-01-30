@@ -1,3 +1,4 @@
+package org.example;
 import java.util.Random;
 
 public class Board {
@@ -18,7 +19,7 @@ public class Board {
         }
 
     }
- 
+
     public boolean isGameOver() { //checks whether game is over
         return gameOver;
     }
